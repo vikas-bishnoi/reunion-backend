@@ -8,4 +8,8 @@ app_name = "post"
 router = DefaultRouter()
 router.register("posts", views.PostViewSet)
 
-urlpatterns = router.urls
+urlpatterns = [
+    path("comment/<int:pk>", views.CommentView.as_view(), name="comment"),
+
+]
+urlpatterns += router.urls

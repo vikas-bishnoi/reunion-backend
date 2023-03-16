@@ -9,11 +9,11 @@
     [x] RETURN: User Name.
     [] RETURN: Number of followers & followings.
 
-[] POST api/posts/ would add a new post created by the authenticated user.
-    [] Input: Title, Description
-    [] RETURN: Post[]ID, Title, Description, Created Time(UTC).
+[x] POST api/posts/ would add a new post created by the authenticated user.
+    [x] Input: Title, Description
+    [x] RETURN: Post[]ID, Title, Description, Created Time(UTC).
 
-[] DELETE api/posts/{id} would delete post with {id} created by the authenticated user.
+[x] DELETE api/posts/{id} would delete post with {id} created by the authenticated user.
 
 [] GET api/posts/{id} would return a single post with {id} populated with its number of likes and comments
 

@@ -30,8 +30,8 @@
         [] comments: Array of comments, for the particular post
         [] likes: Number of likes for the particular post
 
-[] POST api/like/{id} would like the post with {id} by the authenticated user.
-[] POST api/unlike/{id} would unlike the post with {id} by the authenticated user.
+[x] POST api/like/{id} would like the post with {id} by the authenticated user.
+[x] POST api/unlike/{id} would unlike the post with {id} by the authenticated user.
 
 [x] POST api/comment/{id} add comment for post with {id} by the authenticated user.
     [x] Input: Comment

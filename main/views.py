@@ -17,7 +17,6 @@ def login(request):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
     user = authenticate(email=email, password=password)
-    print(user)
     if user:
         encoded_jwt = jwt.encode(
             {"id": user.pk},

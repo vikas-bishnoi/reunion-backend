@@ -130,7 +130,7 @@ SECRET_KEY = 'SflKxwRJSMeKKJf36PPOkM6POkMeeKKJ6ssw5c'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'config.authentication.JWTAuthentication',
+        'reunion.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ]
 }

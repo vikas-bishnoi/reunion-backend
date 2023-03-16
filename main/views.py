@@ -5,9 +5,12 @@ import jwt
 
 from rest_framework import status
 from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from rest_framework.response import Response
 
-# Create your views here.
+from main.serializers import UserSerializer
+
+
 @api_view(["POST"])
 def login(request):
     email = request.data.get("email")
@@ -26,3 +29,10 @@ def login(request):
         return Response(data={"token": encoded_jwt}, status=status.HTTP_202_ACCEPTED)
     else:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+
+class UserView(APIView):
+    def get(self, request):
+        if request.user.is_authenticated:
+            user = UserSerializer(request.user)
+            return Response(data=user.data)

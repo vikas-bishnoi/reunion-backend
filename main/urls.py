@@ -5,5 +5,5 @@ app_name = "main"
 
 urlpatterns = [
     path("authenticate/", views.login),
-    # path("user/", views.MeView.as_view()),
+    path("user/", views.UserView.as_view()),
 ]

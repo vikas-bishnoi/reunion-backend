@@ -1,12 +1,13 @@
-[] POST /api/authenticate should perform user authentication and return a JWT token.
-    [] INPUT: Email, Password
-    [] RETURN: JWT token
+[x] POST /api/authenticate should perform user authentication and return a JWT token.
+    [x] INPUT: Email, Password
+    [x] RETURN: JWT token
     ➡️ **NOTE:** Use dummy email & password for authentication. No need to create endpoint for registering new user.
 
 [] POST /api/follow/{id} authenticated user would follow user with {id}
 [] POST /api/unfollow/{id} authenticated user would unfollow a user with {id}
-[] GET /api/user should authenticate the request and return the respective user profile.
-    [] RETURN: User Name, number of followers & followings.
+[-] GET /api/user should authenticate the request and return the respective user profile.
+    [x] RETURN: User Name.
+    [] RETURN: Number of followers & followings.
 
 [] POST api/posts/ would add a new post created by the authenticated user.
     [] Input: Title, Description

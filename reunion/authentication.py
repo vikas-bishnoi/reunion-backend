@@ -16,7 +16,12 @@ class JWTAuthentication(authentication.BaseAuthentication):
             else:
                 bearer, jwt_token = token.split(" ")
                 decoded = jwt.decode(jwt_token, settings.SECRET_KEY, algorithms=["HS256"])
-                pk = decoded.get("id")
+
+                
+                print('decoded')
+                print(decoded)
+                
+                id = decoded.get("id")
                 user = User.objects.get(id=id)
                 return (user, None)
 

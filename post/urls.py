@@ -6,6 +6,6 @@ from rest_framework.routers import DefaultRouter
 app_name = "post"
 
 router = DefaultRouter()
-router.register("", views.PostViewSet)
+router.register("posts", views.PostViewSet)
 
 urlpatterns = router.urls

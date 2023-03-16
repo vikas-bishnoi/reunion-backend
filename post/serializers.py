@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from post.models import Post
+from post.models import Post, Comment
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,3 +21,10 @@ class PostListDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         exclude = ('author', )
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ('id', )
+

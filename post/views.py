@@ -1,9 +1,11 @@
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.views import APIView
 
 from post.models import Post
 from post.serializers import PostSerializer, PostListDetailSerializer, PostDetailSerializer
 from post.permissions import IsAuthor
+
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
@@ -22,4 +24,7 @@ class PostViewSet(viewsets.ModelViewSet):
             permission_classes = [IsAuthor]
         
         return [permission() for permission in permission_classes]
-    
+
+
+class CommentView(APIView):
+    pass

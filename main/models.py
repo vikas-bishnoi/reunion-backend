@@ -1,7 +1,8 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
-# Create your models here.
+
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -32,3 +33,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
+
+
+class Post(models.Model):
+    author = models.ForeignKey(to='main.User', on_delete=models.CASCADE)
+    title = models.CharField(max_length=256)
+    description = models.TextField()
+    created_time = models.DateTimeField(default=timezone.now)

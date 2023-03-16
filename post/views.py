@@ -39,6 +39,36 @@ class CommentView(APIView):
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid():
             comment = serializer.save(post=post, author=request.user)
-            return Response(CommentSerializer(comment).data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class LikeView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, pk):
+        if pk is not None:
+            try:
+                user = request.user
+                post = get_object_or_404(Post, pk=pk)
+                if user not in post.likes.all():
+                    post.likes.add(user)
+                return Response(status=status.HTTP_200_OK)
+            except Post.DoesNotExist:
+                pass
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+class UnlikeView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, pk):
+        if pk is not None:
+            try:
+                user = request.user
+                post = get_object_or_404(Post, pk=pk)
+                if user in post.likes.all():
+                    post.likes.remove(user)
+                return Response(status=status.HTTP_200_OK)
+            except Post.DoesNotExist:
+                pass
+        return Response(status=status.HTTP_400_BAD_REQUEST)

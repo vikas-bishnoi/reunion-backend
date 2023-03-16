@@ -5,6 +5,7 @@
 
 [] POST api/follow/{id} authenticated user would follow user with {id}
 [] POST api/unfollow/{id} authenticated user would unfollow a user with {id}
+
 [-] GET api/user should authenticate the request and return the respective user profile.
     [x] RETURN: User Name.
     [] RETURN: Number of followers & followings.
@@ -31,6 +32,7 @@
 
 [] POST api/like/{id} would like the post with {id} by the authenticated user.
 [] POST api/unlike/{id} would unlike the post with {id} by the authenticated user.
-[] POST api/comment/{id} add comment for post with {id} by the authenticated user.
-    [] Input: Comment
-    [] Return: Comment[]ID
+
+[x] POST api/comment/{id} add comment for post with {id} by the authenticated user.
+    [x] Input: Comment
+    [x] Return: Comment[]ID

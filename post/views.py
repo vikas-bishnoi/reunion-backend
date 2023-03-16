@@ -32,12 +32,13 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 class CommentView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
     def post(self, request, pk):
         post = get_object_or_404(Post, pk=pk)
-        data = {'post': post, 'comment': pk, 'author': request.user}
-        serializer = CommentSerializer(data=data)
-        # if serializer.is_valid():
-        #     vote = serializer.save()
-        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # else:
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid():
+            comment = serializer.save(post=post, author=request.user)
+            return Response(CommentSerializer(comment).data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

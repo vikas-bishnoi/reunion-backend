@@ -15,7 +15,10 @@
 
 [x] DELETE api/posts/{id} would delete post with {id} created by the authenticated user.
 
-[] GET api/posts/{id} would return a single post with {id} populated with its number of likes and comments
+[-] GET api/posts/{id} would return a single post 
+    [x] with {id} populated 
+    [] with its number of likes 
+    [] with its comments
 
 [] GET api/all_posts would return all posts created by authenticated user sorted by post time.
     [] RETURN: For each post return the following values

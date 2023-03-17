@@ -43,6 +43,7 @@ class CommentView(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class LikeView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -57,6 +58,7 @@ class LikeView(APIView):
             except Post.DoesNotExist:
                 pass
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 class UnlikeView(APIView):
     permission_classes = [permissions.IsAuthenticated]

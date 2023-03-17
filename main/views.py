@@ -42,6 +42,7 @@ class UserView(APIView):
             user = UserSerializer(request.user)
             return Response(data=user.data)
 
+
 class FollowView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -56,6 +57,7 @@ class FollowView(APIView):
             except User.DoesNotExist:
                 pass
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 class UnfollowView(APIView):
     permission_classes = [permissions.IsAuthenticated]

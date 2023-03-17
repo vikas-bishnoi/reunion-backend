@@ -19,4 +19,18 @@ class PublicUserAPITests(TestCase):
 
     def setUp(self):
         self.client = APIClient()
+    
+    def test_create_valid_user_success(self):
+        payload = {
+            'email': 'test@vikas.com',
+            'password': 'test1234',
+            'name': 'Test Case'
+        }
+        res = self.client.post(REGISTER_URL, payload)
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        us = get_user_model().objects.get(**res.data)
+        self.assertTrue(
+            us.check_password(payload['password'])
+        )
+        self.assertNotIn('password', res.data)
 

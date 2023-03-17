@@ -8,21 +8,9 @@ services:
     ports:
       - 8000:8000
     environment:
-     - DB_HOST=db
-     - DB_NAME=app
-     - DB_USER=postgres
-     - DB_PASS=postgres
+     - DB_HOST=dpg-cga6odhmbg58br3hg810-a.oregon-postgres.render.com
+     - DB_NAME=reunion_4bjh
+     - DB_USER=reunion_4bjh_user
+     - DB_PASS=w8SPT73k3EU8W8kVLdMMD45fXtc6gATU
     depends_on:
       - db
-
-  db:
-    image: postgres:14.1-alpine
-    restart: always
-    environment:
-      - POSTGRES_DB=app
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    volumes:
-      - .dbdata:/var/lib/postgresql
-    ports:
-      - 5432:5432

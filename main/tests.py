@@ -113,8 +113,15 @@ class AuthenticatedUserAPITests(TestCase):
         payload = {'email':'test2@vikas.com', 'name':'Test 2', 'password':'test1234'}
         user = create_user(**payload)
 
-        url = reverse('main:follow', args=[2])
+        url = reverse('main:follow', args=[user.id])
 
         res = self.client.post(url)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertIn(self.user, user.followers.all())
+        
+    def test_follow_self_not_allowed(self):
+        url = reverse('main:follow', args=[self.user.id])
+
+        res = self.client.post(url)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertNotIn(self.user, self.user.followers.all())

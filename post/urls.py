@@ -14,5 +14,4 @@ urlpatterns = [
     path("unlike/<int:pk>", views.UnlikeView.as_view(), name="unlike"),
     path("all_posts", views.PostViewSet.as_view({'get': 'list'}), name="all_posts"),
 ]
-
 urlpatterns += router.urls

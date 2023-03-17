@@ -16,14 +16,14 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
 
     def get_serializer_class(self):
-        if self.action == "create":
+        if self.action == 'create':
             return PostSerializer
         elif self.action == 'list':
             return PostListDetailSerializer
         return PostDetailSerializer
 
     def get_permissions(self):
-        if self.action == "create":
+        if self.action == 'create' or self.action == 'list':
             permission_classes = [permissions.IsAuthenticated]
         else:
             permission_classes = [IsAuthor]

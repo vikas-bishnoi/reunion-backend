@@ -19,9 +19,14 @@ class PostSerializer(serializers.ModelSerializer):
         return post
 
 class PostDetailSerializer(serializers.ModelSerializer):
+    likes = serializers.ReadOnlyField(
+        source='liked_by.count', 
+    )
+    comments = CommentSerializer(read_only=True, many=True)
+
     class Meta:
         model = Post
-        fields = ('id', )
+        fields = ('id', 'likes', 'comments')
 
 
 class PostListDetailSerializer(serializers.ModelSerializer):

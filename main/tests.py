@@ -30,7 +30,7 @@ class PublicUserAPITests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         user = get_user_model().objects.get(**res.data)
         self.assertTrue(
-            us.check_password(payload['password'])
+            user.check_password(payload['password'])
         )
         self.assertNotIn('password', res.data)
 
@@ -73,3 +73,17 @@ class PublicUserAPITests(TestCase):
         res = self.client.post(AUTHENTICATE_URL, payload)
         self.assertNotIn('token', res.data)
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_login_user_with_invalid_credentials(self):
+        create_user(email='test@vikas.com', name='Test Case', password='test1234')
+        payload = {
+            'email': 'test@vikas.com',
+            'password': 'test'
+        }
+        res = self.client.post(AUTHENTICATE_URL, payload)
+        self.assertNotIn('token', res.data)
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+    
+    def test_get_user_unauthorised(self):
+        res = self.client.get(USER_URL)
+        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)

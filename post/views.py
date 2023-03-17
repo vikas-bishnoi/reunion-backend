@@ -16,6 +16,8 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
 
     def get_serializer_class(self):
+        print('self.action', self.action)
+        
         if self.action == 'create':
             return PostSerializer
         elif self.action == 'list':

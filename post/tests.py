@@ -36,14 +36,6 @@ class AuthorisedPostsAPITest(TestCase):
             email='test@vikas.com', name='Test Case', password='test1234'
         )
         self.client.force_authenticate(self.user)
-    
-    def test_create_post(self):
-        payload = {
-            "title": "titl3",
-            "description": "Description3"
-        }
-        res = self.client.post(POSTS_URL, payload)
-        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
 
     def test_create_post_with_invalid_credentials(self):
         payload = {

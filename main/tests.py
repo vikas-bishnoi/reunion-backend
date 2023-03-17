@@ -87,3 +87,24 @@ class PublicUserAPITests(TestCase):
     def test_get_user_unauthorised(self):
         res = self.client.get(USER_URL)
         self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class AuthenticatedUserAPITests(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+    
+    def setUp(self):
+        self.user = create_user(
+            email='test@vikas.com',
+            password='test1234',
+            name='Test User'
+        )
+
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.user)
+
+    def test_retrieve_profile_success(self):
+        res = self.client.get(USER_URL)
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data['name'], self.user.name)

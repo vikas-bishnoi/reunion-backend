@@ -6,9 +6,9 @@
 [x] POST api/follow/{id} authenticated user would follow user with {id}
 [x] POST api/unfollow/{id} authenticated user would unfollow a user with {id}
 
-[-] GET api/user should authenticate the request and return the respective user profile.
+[x] GET api/user should authenticate the request and return the respective user profile.
     [x] RETURN: User Name.
-    [] RETURN: Number of followers & followings.
+    [x] RETURN: Number of followers & followings.
 
 [x] POST api/posts/ would add a new post created by the authenticated user.
     [x] Input: Title, Description
@@ -21,8 +21,8 @@
     [] with its number of likes 
     [] with its comments
 
-[-] GET api/all_posts would return all posts created by authenticated user sorted by post time.
-    [-] RETURN: For each post return the following values
+[x] GET api/all_posts would return all posts created by authenticated user sorted by post time.
+    [x] RETURN: For each post return the following values
         [x] id: ID of the post
         [x] title: Title of the post
         [x] desc: Description of the post
@@ -35,4 +35,4 @@
 
 [x] POST api/comment/{id} add comment for post with {id} by the authenticated user.
     [x] Input: Comment
-    [x] Return: Comment[]ID
+    [x] Return: Comment ID

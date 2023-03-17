@@ -55,3 +55,13 @@ class PublicUserAPITests(TestCase):
         res = self.client.post(AUTHENTICATE_URL, payload)
         self.assertIn('token', res.data)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
+    
+    def test_login_user_with_invalid_credentials(self):
+        create_user(email='test@vikas.com', name='Test Case', password='test1234')
+        payload = {
+            'email': 'test@vikas.com',
+            'password': 'test'
+        }
+        res = self.client.post(AUTHENTICATE_URL, payload)
+        self.assertNotIn('token', res.data)
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)

@@ -3,8 +3,8 @@
     [x] RETURN: JWT token
     ➡️ **NOTE:** Use dummy email & password for authentication. No need to create endpoint for registering new user.
 
-[] POST api/follow/{id} authenticated user would follow user with {id}
-[] POST api/unfollow/{id} authenticated user would unfollow a user with {id}
+[x] POST api/follow/{id} authenticated user would follow user with {id}
+[x] POST api/unfollow/{id} authenticated user would unfollow a user with {id}
 
 [-] GET api/user should authenticate the request and return the respective user profile.
     [x] RETURN: User Name.
@@ -21,14 +21,14 @@
     [] with its number of likes 
     [] with its comments
 
-[] GET api/all_posts would return all posts created by authenticated user sorted by post time.
-    [] RETURN: For each post return the following values
-        [] id: ID of the post
-        [] title: Title of the post
-        [] desc: Description of the post
-        [] created_at: Date and time when the post was created
-        [] comments: Array of comments, for the particular post
-        [] likes: Number of likes for the particular post
+[-] GET api/all_posts would return all posts created by authenticated user sorted by post time.
+    [-] RETURN: For each post return the following values
+        [x] id: ID of the post
+        [x] title: Title of the post
+        [x] desc: Description of the post
+        [x] created_at: Date and time when the post was created
+        [x] comments: Array of comments, for the particular post
+        [x] likes: Number of likes for the particular post
 
 [x] POST api/like/{id} would like the post with {id} by the authenticated user.
 [x] POST api/unlike/{id} would unlike the post with {id} by the authenticated user.

@@ -6,10 +6,10 @@ class Post(models.Model):
     title = models.CharField(max_length=256)
     description = models.TextField()
     created_time = models.DateTimeField(default=timezone.now)
-    likes = models.ManyToManyField(to='main.User', related_name='likes', blank=True)
+    liked_by = models.ManyToManyField(to='main.User', related_name='liked', blank=True)
 
 
 class Comment(models.Model):
-    post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='post')
+    post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='comments')
     comment = models.CharField(max_length=256)
     author = models.ForeignKey('main.User', on_delete=models.CASCADE)

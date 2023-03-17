@@ -35,3 +35,10 @@ class AuthorisedPostsAPITest(TestCase):
         }
         res = self.client.post(POSTS_URL, payload)
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+
+    def test_create_post_with_invalid_credentials(self):
+        payload = {
+            "description": "Description3"
+        }
+        res = self.client.post(POSTS_URL, payload)
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)

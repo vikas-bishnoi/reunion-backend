@@ -12,5 +12,3 @@ services:
      - DB_NAME=reunion_4bjh
      - DB_USER=reunion_4bjh_user
      - DB_PASS=w8SPT73k3EU8W8kVLdMMD45fXtc6gATU
-    depends_on:
-      - db

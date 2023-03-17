@@ -28,11 +28,19 @@ class PublicUserAPITests(TestCase):
         }
         res = self.client.post(REGISTER_URL, payload)
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
-        us = get_user_model().objects.get(**res.data)
+        user = get_user_model().objects.get(**res.data)
         self.assertTrue(
             us.check_password(payload['password'])
         )
         self.assertNotIn('password', res.data)
+
+    def test_create_valid_user_with_invalid_credentials(self):
+        payload = {
+            'email': 'test@vikas.com',
+            'password': 'test1234',
+        }
+        res = self.client.post(REGISTER_URL, payload)
+        self.assertEqual(res.status_code, 400)
 
     def test_user_already_exists(self):
         payload = {

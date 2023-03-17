@@ -11,6 +11,15 @@ POSTS_URL = reverse('post:post-list')
 ALL_POSTS_URL = reverse('post:all_posts')
 
 
+def create_post(author, **params):
+    defaults = {
+        'title': 'title',
+        'description': 'description'
+    }
+    defaults.update(params)
+    return Post.objects.create(author=author, **defaults)
+
+
 class PublicPostsAPITest(TestCase):
     def setUp(self):
         self.client = APIClient()
@@ -42,3 +51,10 @@ class AuthorisedPostsAPITest(TestCase):
         }
         res = self.client.post(POSTS_URL, payload)
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_get_all_posts(self):
+        create_post(author=self.user)
+        create_post(author=self.user)
+        res = self.client.get(ALL_POSTS_URL)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(res.data), 2)

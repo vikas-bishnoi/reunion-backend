@@ -125,3 +125,18 @@ class AuthenticatedUserAPITests(TestCase):
         res = self.client.post(url)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertNotIn(self.user, self.user.followers.all())
+        
+    def test_unfollow_user(self):
+        payload = {'email':'test2@vikas.com', 'name':'Test 2', 'password':'test1234'}
+        user = create_user(**payload)
+
+        follow_url = reverse('main:follow', args=[user.id])
+        unfollow_url = reverse('main:unfollow', args=[user.id])
+
+        res = self.client.post(follow_url)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertIn(self.user, user.followers.all())
+
+        res = self.client.post(unfollow_url)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertNotIn(self.user, user.followers.all())

@@ -7,11 +7,11 @@ import jwt
 from rest_framework import status
 from rest_framework import permissions
 
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from main.serializers import UserSerializer
+from main.serializers import ReadUserSerializer, WriteUserSerializer
 
 from .models import User
 
@@ -39,8 +39,16 @@ class UserView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
-            user = UserSerializer(request.user)
-            return Response(data=user.data)
+        user = ReadUserSerializer(request.user)
+        return Response(data=user.data)
+
+class RegisterUserView(APIView):
+    def post(self, request):
+        serializer = WriteUserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class FollowView(APIView):

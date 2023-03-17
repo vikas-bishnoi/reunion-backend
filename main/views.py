@@ -30,7 +30,7 @@ def login(request):
             settings.SECRET_KEY,
             algorithm="HS256"
         )
-        return Response(data={"token": encoded_jwt}, status=status.HTTP_202_ACCEPTED)
+        return Response(data={"token": encoded_jwt}, status=status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 

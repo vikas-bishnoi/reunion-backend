@@ -10,6 +10,7 @@ REGISTER_URL = reverse('main:register')
 AUTHENTICATE_URL = reverse('main:authenticate')
 USER_URL = reverse('main:user')
 
+
 def create_user(**params):
     return get_user_model().objects.create_user(**params)
 
@@ -105,6 +106,15 @@ class AuthenticatedUserAPITests(TestCase):
 
     def test_retrieve_profile_success(self):
         res = self.client.get(USER_URL)
-
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data['name'], self.user.name)
+
+    def test_follow_user(self):
+        payload = {'email':'test2@vikas.com', 'name':'Test 2', 'password':'test1234'}
+        user = create_user(**payload)
+
+        url = reverse('main:follow', args=[2])
+
+        res = self.client.post(url)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertIn(self.user, user.followers.all())
